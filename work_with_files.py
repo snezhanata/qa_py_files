@@ -46,7 +46,7 @@ def file_pdf_check(file_pdf_name):
     page = pdf_reader.pages[1]
     text = page.extract_text()
     print(text)
-    assert 'The end, and just as well' in text
+    assert 'typing this stuff' in text
 
 
 file_zip_creation('file_4.zip')

@@ -4,13 +4,13 @@ from zipfile import ZipFile, ZIP_DEFLATED
 from PyPDF2 import PdfReader
 from openpyxl import load_workbook
 
-# Task_1: Запаковать в zip архив несколько разных файлов: pdf, xlsx, csv
-# Task_2: Положить его в ресурсы
-
 target_path = './resources/'
 source_path = './source'
 file_dir = os.listdir(source_path)
 
+
+# Task_1: Запаковать в zip архив несколько разных файлов: pdf, xlsx, csv
+# Task_2: Положить его в ресурсы
 def file_zip_creation(file_zip_name):
     with ZipFile(f'{target_path}{file_zip_name}', 'w', compression=ZIP_DEFLATED) as file_zip:
         for file in file_dir:
@@ -18,8 +18,8 @@ def file_zip_creation(file_zip_name):
             file_zip.write(add_file, os.path.relpath(add_file, source_path))
         file_zip.extractall(target_path)
 
-# Task_3: Реализовать чтение и проверку содержимого каждого файла из архива
 
+# Task_3: Реализовать чтение и проверку содержимого каждого файла из архива
 def file_csv_check(file_csv_name):
     print('CSV Check:')
     with open(f'{target_path}{file_csv_name}') as file_csv:
@@ -31,12 +31,14 @@ def file_csv_check(file_csv_name):
         # for row in enumerate(table):
         #     print(row) # распечатать весь файл
 
+
 def file_xlsx_check(file_xlsx_name):
     print('\nXLSX Check:')
     workbook = load_workbook(f'{target_path}{file_xlsx_name}')
     sheet = workbook.active
     print(sheet.cell(row=3, column=2).value)  # OR print(sheet['B3'].value)
     assert sheet[23][1].value == 'Что нужно сделать, чтобы функция возвратила значение?'
+
 
 def file_pdf_check(file_pdf_name):
     print('\nPDF Check:')
